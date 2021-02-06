@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ShopController!{% endblock %}
+{% block title %}Hello Shoppers!{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,16 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Ahmed/Desktop/java/PhpWorkspace/mpWeb/src/Controller/ShopController.php'|file_link(0) }}">src/Controller/ShopController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Ahmed/Desktop/java/PhpWorkspace/mpWeb/templates/shop/index.html.twig'|file_link(0) }}">templates/shop/index.html.twig</a></code></li>
-    </ul>
+        {% for product in products %}
+            <article>
+                annonce : {{ product.name }}
+                créée le : {{ product.datePosted | date('d/m/Y') }}
+                à : {{ product.location }}
+                description : {{ product.description }}
+            <div>
+                <img src="{{ product.image }}" />
+            </div>
+            </article>
+        {% endfor %}
 </div>
 {% endblock %}

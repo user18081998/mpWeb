@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formProduct 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Post a product !</h1>
+    {{ form_start(formProduct) }}
+
+    {{ form_row(formProduct.name, {'attr' : {'placeholder' : 'Nom du produit' }}) }}
+
+    {{ form_row(formProduct.description, {'attr' : {'placeholder' : 'Description du produit' }}) }}
+
+    {{ form_row(formProduct.location, {'attr' : {'placeholder' : 'Localisation du vendeur' }}) }}
+
+    {{ form_row(formProduct.image, {'attr' : {'placeholder' : 'Image pour le produit' }}) }}
+
+    <button type="submit", class="btn btn-success"> Ajouter Produit</button>
+
+
+{% endblock %}
