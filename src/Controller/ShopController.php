@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
+use Symfony\Component\Validator\Constraints\Date;
 
 class ShopController extends AbstractController
 {
@@ -34,7 +35,7 @@ class ShopController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             if(!$product->getId()){
-                $product->setDatePosted(new \Date());
+                $product->setDatePosted(new \DateTime());
             }
             $manager->persist($product);
             $manager->flush();
