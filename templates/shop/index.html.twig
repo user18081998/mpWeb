@@ -8,17 +8,25 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
+<section class="articles">
         {% for product in products %}
             <article>
-                annonce : {{ product.name }}
-                créée le : {{ product.datePosted | date('d/m/Y') }}
-                à : {{ product.location }}
-                description : {{ product.description }}
-            <div>
-                <img src="{{ product.image }}" />
-            </div>
+
+                <div class="content">
+                    <table style="width:50%">
+                        <tr>
+                            <th><img src="{{ product.image }}" style="=width: 200px;height: 400px;object-fit: cover;" /></th>
+                            <th>
+                                <h2> {{ product.name }} </h2>
+                                <div class="metadata">créée le : {{ product.datePosted | date('d/m/Y') }}
+                                    <br>
+                                    location :  : {{ product.location }}
+                                    Description . {{ product.description | raw }}1
+                                </div>
+                            </th>
+                        </tr>
+                </div>
             </article>
         {% endfor %}
-</div>
+</section>
 {% endblock %}
