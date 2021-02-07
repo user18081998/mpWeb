@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 3</title>
+    <title>{% block title %}makouk fadha2i{% endblock %}</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -193,7 +193,9 @@
     </style>
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    {% block stylesheets %}{% endblock %}
 
+    {% block javascripts %}{% endblock %}
 </head>
 <body>
 
@@ -244,7 +246,7 @@
                 <div class="navbar-header">
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
                         <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Ouvrir Sidebar</span>
+                        <span>Basculer la sidebar</span>
                     </button>
                 </div>
 
@@ -262,8 +264,10 @@
                 </div>
             </div>
         </nav>
-    {% block body %}
-    {% endblock %}
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
     </div>
 </div>
 
