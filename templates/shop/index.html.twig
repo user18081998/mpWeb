@@ -21,10 +21,13 @@
                                 <div class="metadata">créée le : {{ product.datePosted | date('d/m/Y') }}
                                     <br>
                                     location :  : {{ product.location }}
-                                    Description . {{ product.description | raw }}1
+                                    Description : {{ product.description | raw }}
+                                    Category :
+                                    <a href="{{ path('category', {id: product.category.id}) }}"> {{ product.category }} </a>
                                 </div>
                             </th>
                         </tr>
+                    </table>
                 </div>
             </article>
         {% endfor %}

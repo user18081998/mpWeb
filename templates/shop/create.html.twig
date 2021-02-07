@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
+{#{% block javascripts %}#}
+{#    <script>$('.dropdown-item').dropdown()</script>#}
 
+{#{% endblock %}#}
 {% form_theme formProduct 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
@@ -15,7 +18,29 @@
 
     {{ form_row(formProduct.image, {'attr' : {'placeholder' : 'Image pour le produit' }}) }}
 
-    <button type="submit", class="btn btn-success"> Ajouter Produit</button>
+    {{ form_row(formProduct.category, {'attr' : {'placeholder' : 'Selectionnez une Categorie' ,
+        'class' : 'btn btn-secondary dropdown-toggle'
+    }}) }}
 
+{#    <div class="dropdown show">#}
+{#        <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#            Category</button>#}
+{#        <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}
+{#            {% for category in categories %}#}
+{#            <a class="dropdown-item" href="#">{{ category.name }}</a>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
+{#    <label>Category</label>#}
+{#    <select class = "btn btn-secondary dropdown-toggle">#}
+{#        {% for category in categories %}}#}
+{#        <option value = "{{ category.id }}">{{ category.name }}</option>#}
+{#        {% endfor %}#}
+{#    </select>#}
+{#    <br>#}
+    <p></p>
+
+    <button type="submit", class="btn btn-success"> Ajouter Produit</button>
+    <br>
 
 {% endblock %}

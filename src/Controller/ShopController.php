@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Form\ProductType;
+use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,11 +17,21 @@ use Symfony\Component\Validator\Constraints\Date;
 class ShopController extends AbstractController
 {
     /**
+     * @Route("/category/{id}", name="category")
      * @Route("/", name="home")
      */
-    public function index(ProductRepository $repo): Response
+    public function index(ProductRepository $repo, $id=null): Response
     {
-        $products = $repo->findAll();
+        if($id){
+            $products = $repo->createQueryBuilder("c")
+                ->where('c.category = :categoryid')
+                ->setParameter('categoryid', $id)
+                ->getQuery()
+                ->getResult();
+        }
+        else {
+            $products = $repo->findAll();
+        }
         return $this->render('shop/index.html.twig', [
             'products' => $products
         ]);
@@ -28,7 +40,7 @@ class ShopController extends AbstractController
     /**
      * @Route("/new-product", name="make-product")
      */
-    public function makeProduct(Request $request, EntityManagerInterface $manager) : Response
+    public function makeProduct(Request $request, EntityManagerInterface $manager, CategoryRepository $catRepo) : Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -43,6 +55,23 @@ class ShopController extends AbstractController
         }
 
         return $this->render('shop/create.html.twig', [
-            'formProduct' => $form->createView()]);
+            'formProduct' => $form->createView(),
+            'categories' => $catRepo->findAll()
+            ]);
     }
+
+//    /**
+//     * @Route("/category/{id}", name="category")
+//     */
+//    public function showCategory($id, ProductRepository $repo) : Response
+//    {
+//        $products = $repo->createQueryBuilder("c")
+//            ->where('c.category = :categoryid')
+//            ->setParameter('categoryid', $id)
+//            ->getQuery()
+//            ->getResult();
+//        return $this->render('shop/category.html.twig', [
+//            'products' => $products
+//        ]);
+//    }
 }

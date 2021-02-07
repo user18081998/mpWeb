@@ -7,6 +7,7 @@
               href="https://bootswatch.com/4/flatly/bootstrap.min.css">
         {% block stylesheets %}{% endblock %}
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         {% block javascripts %}{% endblock %}
     </head>
     <body>
@@ -37,6 +38,9 @@
             </form>
         </div>
     </nav>
+
+    
+
     <div class="container">
     {% block body %}{% endblock %}
     </div>
