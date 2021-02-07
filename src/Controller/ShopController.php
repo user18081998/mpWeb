@@ -20,7 +20,7 @@ class ShopController extends AbstractController
      * @Route("/category/{id}", name="category")
      * @Route("/", name="home")
      */
-    public function index(ProductRepository $repo, $id=null): Response
+    public function index(ProductRepository $repo, $id=null, CategoryRepository $catRepo): Response
     {
         if($id){
             $products = $repo->createQueryBuilder("c")
@@ -33,7 +33,8 @@ class ShopController extends AbstractController
             $products = $repo->findAll();
         }
         return $this->render('shop/index.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'categories' => $catRepo->findAll()
         ]);
     }
 
