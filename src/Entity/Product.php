@@ -54,6 +54,11 @@ class Product
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $avilable;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -141,5 +146,21 @@ class Product
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getAvilable(): ?bool
+    {
+        return $this->avilable;
+    }
+
+    public function setAvilable(?bool $avilable): self
+    {
+        $this->avilable = $avilable;
+
+        return $this;
+    }
+
+    public function __construct(){
+        $this->avilable=true;
     }
 }

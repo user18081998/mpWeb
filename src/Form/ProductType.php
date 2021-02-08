@@ -7,6 +7,7 @@ use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -27,6 +28,10 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('location')
+            ->add('avilable', CheckboxType::class, [
+                'label'    => 'Is this product available for selling?',
+                'required' => false,
+            ])
             ->add('image');
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
         $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));

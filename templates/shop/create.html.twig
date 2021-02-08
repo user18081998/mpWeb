@@ -3,8 +3,13 @@
 {% form_theme formProduct 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+    {% if app.user %}
+    <h1>
 
-    <h1>Post a product !</h1>
+        {% if editMode %}Edit your product or mark it as sold!
+        {% else %}Post a product !
+        {% endif %}
+    </h1>
     {{ form_start(formProduct) }}
 
     {{ form_row(formProduct.name, {'attr' : {'placeholder' : 'Nom du produit' }}) }}
@@ -35,9 +40,26 @@
 {#        {% endfor %}#}
 {#    </select>#}
 {#    <br>#}
+        {% if editMode %}
+            {{ form_row(formProduct.avilable, {'attr' : {'placeholder' : 'mark as sold' }}) }}
+        {% endif %}
+        <br>
     <p></p>
 
-    <button type="submit", class="btn btn-success"> Ajouter Produit</button>
+    <button type="submit", class="btn btn-success">
+        {% if editMode %}Save modifications
+        {% else %}Add product
+        {% endif %}
+    </button>
+
     <br>
+    {{ form_end(formProduct) }}
+    {% else %}
+    <p>You must login or create an account first!</p>
+    <ul class="list-unstyled CTAs">
+        <li><a href="{{ path('login') }}" class="login">S'identifier</a></li>
+        <li><a href="{{ path('signup') }}" class="signup">S'inscrire</a></li>
+    </ul>
+    {% endif %}
 
 {% endblock %}

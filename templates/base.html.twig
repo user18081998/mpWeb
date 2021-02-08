@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{% block title %}makouk fadha2i{% endblock %}</title>
+    <title>{% block title %}MAKOUK{% endblock %}</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -205,20 +205,22 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3><a href="{{ path('home') }}">MAKOUK FADHA2I NAYYEEEEEEK</a></h3>
+            <h3><a href="{{ path('home') }}">MAKOUK</a></h3>
         </div>
 
         <ul class="list-unstyled components">
 {#            <p>Naviguez le site or choisissez une categorie pour parcourir les produits.</p>#}
-            <p>Tayara.tn ema tsawer sa9in akahaw</p>
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li><a href="#">Home 1</a></li>
-                    <li><a href="#">Home 2</a></li>
-                    <li><a href="#">Home 3</a></li>
-                </ul>
-            </li>
+            <p>Makouk is a platform where you post products you wish to sell</p>
+{#            <li class="active">#}
+{#                <a href="{{ path('home') }}" data-toggle="collapse" aria-expanded="false">Home</a>#}
+{#                <ul class="collapse list-unstyled" id="homeSubmenu">#}
+{#                </ul>#}
+{#            </li>#}
+            <li><a href="{{ path('home') }}">Home</a></li>
+            <li><a href="{{ path('about-us') }}">About us</a></li>
+            <li><a href="{{ path('contact') }}">Contact us</a></li>
+            <hr>
+            <li><a class="nav-link" href="{{ path('make-product') }}">Add a product</a></li>
             <hr>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Categories</a>
@@ -233,8 +235,12 @@
             <hr>
         </ul>
         <ul class="list-unstyled CTAs">
-            <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">S'identifier</a></li>
-            <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">S'inscrire</a></li>
+            {% if not app.user %}
+                <li><a href="{{ path('login') }}" class="login">Login</a></li>
+                <li><a href="{{ path('signup') }}" class="signup">Sign up</a></li>
+            {% else %}
+                <a href="{{ path('logout') }}" class="nav-link">Logout</a>
+            {% endif %}
         </ul>
     </nav>
 
@@ -247,20 +253,19 @@
                 <div class="navbar-header">
                     <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
                         <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Basculer la sidebar</span>
+                        <span>Toggle sidebar</span>
                     </button>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item"><a href="{{ path('home') }}">Home</a></li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('make-product') }}">Ajouter un produit</a>
+                            <a class="nav-link" href="{{ path('make-product') }}">Add a product</a>
                         </li>
-                        <li><a href="#">Page</a></li>
-                        <li><a href="#">Page</a></li>
-                        <li><a href="#">Page</a></li>
-                        <li><a href="#">Page</a></li>
+                        <li class="nav-item"><a href="{{ path('about-us') }}">About us</a></li>
+                        <li class="nav-item"><a href="{{ path('contact') }}">Contact us</a></li>
                     </ul>
                 </div>
             </div>

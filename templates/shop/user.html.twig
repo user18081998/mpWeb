@@ -3,16 +3,16 @@
 {#{% block title %}Hello Shoppers!{% endblock %}#}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
 
-<section class="articles">
-    <h3>Recently posted products : </h3>
-    <hr>
-    <br>
-        {% for product in products %}
+    <section class="articles">
+        <h3>Recently posted products : </h3>
+        <hr>
+        <br>
+        {% for product in user.products %}
             <article>
 
                 <div class="content">
@@ -21,23 +21,23 @@
                             <th><img src="{{ product.image }}" style="=width: 200px;height: 400px;object-fit: cover;" /></th>
                             <th>
                                 <h2> {{ product.name }} </h2>
-                                <div class="metadata">Created At : {{ product.datePosted | date('d/m/Y') }}
+                                <div class="metadata">créée le : {{ product.datePosted | date('d/m/Y') }}
                                     <br>
-                                    Location :  : {{ product.location }}<br>
-                                    Description : {{ product.description | raw }}<br>
+                                    Location :  : {{ product.location }} <br>
+                                    Description : {{ product.description | raw }} <br>
                                     Category :
                                     <a class="btn btn-lg text-decoration-none" href="{{ path('category', {id: product.category.id}) }}"> {{ product.category }} </a>
                                     <br>
                                     Posted by :
                                     {% if product.user %}
-                                        <a class="btn btn-lg text-decoration-none" href="{{ path('user', {id: product.user.id}) }}">{{ product.user.username }}</a>
+                                        <a class="btn btn-lg text-decoration-none" href="{{ path('user', {id: user.id}) }}">{{ product.user.username }}</a>
                                         {% if app.user %}
-                                        {% if product.user.id == app.user.id %}
-                                            <a class="btn btn-lg text-decoration-none" href="{{ path('edit-product', {id: product.id}) }}">Edit this product</a>
-                                        {% endif %}
+                                            {% if product.user.id == app.user.id %}
+                                                <a class="btn btn-lg text-decoration-none" href="{{ path('edit-product', {id: product.id}) }}">Edit this product</a>
                                             {% endif %}
-                                    {% else %} unknown user
                                         {% endif %}
+                                    {% else %} unknown user
+                                    {% endif %}
                                 </div>
                             </th>
                         </tr>
@@ -47,5 +47,5 @@
             <hr>
             <br>
         {% endfor %}
-</section>
+    </section>
 {% endblock %}
